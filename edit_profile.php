@@ -16,11 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contact_info = $_POST['contact_info'];
     $bio = $_POST['bio'];
 
-    // Atualiza as informações do perfil
     $stmt = $pdo->prepare("UPDATE profiles SET profession = :profession, location = :location, contact_info = :contact_info, bio = :bio WHERE user_id = :user_id");
     $stmt->execute(['profession' => $profession, 'location' => $location, 'contact_info' => $contact_info, 'bio' => $bio, 'user_id' => $user_id]);
 
-    // Verifica se a senha também foi enviada
     if (!empty($_POST['password'])) {
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $stmt = $pdo->prepare("UPDATE users SET password = :password WHERE id = :user_id");
@@ -30,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "<p>Perfil atualizado com sucesso!</p>";
 }
 
-// Recupera os dados do perfil para preencher o formulário
 $stmt = $pdo->prepare("SELECT p.*, u.fullname FROM profiles p JOIN users u ON p.user_id = u.id WHERE p.user_id = :user_id");
 $stmt->execute(['user_id' => $user_id]);
 $profile = $stmt->fetch();

@@ -4,7 +4,6 @@ include 'includes/header.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
 
-    // Consulta ao banco de dados para encontrar o usuário
     $stmt = $pdo->prepare("SELECT password FROM users WHERE email = :email");
     $stmt->execute(['email' => $email]);
     $user = $stmt->fetch();
