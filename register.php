@@ -1,5 +1,5 @@
 <?php include 'includes/header.php';
-require 'includes/db_connect.php';
+
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="contact">Informação de contato</label>
         <input type="text" id="contact" name="contact" required>
 
-        <label for="service_name">Nome da Profissão</label>
+        <label for="service_name">Nome do Serviço</label>
         <input type="text" id="service_name" name="service_name" required>
 
         <label for="service_description">Descrição do serviço</label>

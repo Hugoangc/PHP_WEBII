@@ -1,5 +1,4 @@
 <?php
-require 'includes/db_connect.php';  
 include 'includes/header.php';
 
 if (isset($_GET['id'])) {

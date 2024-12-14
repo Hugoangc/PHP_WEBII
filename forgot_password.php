@@ -1,6 +1,5 @@
 <?php
 include 'includes/header.php'; 
-require 'includes/db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];

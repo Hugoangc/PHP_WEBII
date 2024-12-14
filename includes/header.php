@@ -1,6 +1,6 @@
 <?php
 require 'includes/db_connect.php';
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +15,7 @@ require 'includes/db_connect.php';
         <h1>ProFácil</h1>
         <nav>
             <a href="index.php">Home</a>
+            <a href="list_professionals.php">Profissionais</a>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <a href="dashboard.php">Dashboard</a>
                 <a href="logout.php">Logout</a>

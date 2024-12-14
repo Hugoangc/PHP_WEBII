@@ -1,8 +1,6 @@
 <?php
-require 'includes/db_connect.php';
 include 'includes/header.php'; 
 
-session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'professional') {
     header("Location: login.php");

@@ -1,15 +1,11 @@
 <?php
-require 'includes/db_connect.php';
 include 'includes/header.php';
 
-// Verificar se foi passado algum filtro de profissão
 $filter_profession = isset($_GET['profession']) ? $_GET['profession'] : null;
 
-// Consultar profissões únicas para os filtros
 $professions_stmt = $pdo->query("SELECT DISTINCT profession FROM profiles");
 $professions = $professions_stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Consultar profissionais
 $query = "SELECT users.id, users.fullname, profiles.profession, profiles.location, profiles.contact_info 
           FROM users 
           JOIN profiles ON users.id = profiles.user_id";
@@ -46,7 +42,6 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <button type="submit">Filter</button>
     </form>
 
-    <!-- Lista de profissionais -->
     <table>
         <thead>
             <tr>
