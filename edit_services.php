@@ -68,7 +68,6 @@ $stmt = $pdo->prepare("SELECT * FROM services WHERE profile_id = :profile_id");
 $stmt->execute(['profile_id' => $profile_id]);
 $services = $stmt->fetchAll();
 
-include 'includes/header.php';
 ?>
 
 <main>
