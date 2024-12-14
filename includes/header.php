@@ -1,3 +1,7 @@
+<?php
+require 'includes/db_connect.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +15,12 @@
         <h1>ProFácil</h1>
         <nav>
             <a href="index.php">Home</a>
-            <a href="login.php">Login</a>
-            <a href="register.php">Register</a>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <a href="dashboard.php">Dashboard</a>
+                <a href="logout.php">Logout</a>
+            <?php else: ?>
+                <a href="login.php">Login</a>
+                <a href="register.php">Register</a>
+            <?php endif; ?>
         </nav>
     </header>
