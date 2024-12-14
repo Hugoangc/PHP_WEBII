@@ -10,7 +10,7 @@ $professions_stmt = $pdo->query("SELECT DISTINCT profession FROM profiles");
 $professions = $professions_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Consultar profissionais
-$query = "SELECT users.fullname, profiles.profession, profiles.location, profiles.contact_info 
+$query = "SELECT users.id, users.fullname, profiles.profession, profiles.location, profiles.contact_info 
           FROM users 
           JOIN profiles ON users.id = profiles.user_id";
 
@@ -33,7 +33,7 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h2>List of Professionals</h2>
 
     <form method="GET" action="list_professionals.php">
-        <label for="profession">Filter by Profession:</label>
+        <label for="profession">Filtro por profissão</label>
         <select id="profession" name="profession">
             <option value="">All</option>
             <?php foreach ($professions as $prof): ?>
@@ -59,7 +59,11 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tbody>
             <?php foreach ($professionals as $prof): ?>
                 <tr>
-                    <td><?= htmlspecialchars($prof['fullname']) ?></td>
+                <td>
+                    <a href="profiles.php?id=<?= htmlspecialchars($prof['id']) ?>">
+                        <?= htmlspecialchars($prof['fullname']) ?>
+                    </a>
+                </td>
                     <td><?= htmlspecialchars($prof['profession']) ?></td>
                     <td><?= htmlspecialchars($prof['location'] ?? 'N/A') ?></td>
                     <td><?= htmlspecialchars($prof['contact_info'] ?? 'N/A') ?></td>

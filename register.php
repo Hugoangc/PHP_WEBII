@@ -70,10 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="text" id="service_name" name="service_name" required>
 
         <label for="service_description">Descrição do serviço</label>
-        <textarea id="service_description" name="service_description" required></textarea>
+        <textarea id="service_description" name="service_description"></textarea>
 
         <label for="service_price">Serviço/hora</label>
-        <input type="number" id="service_price" name="service_price" step="10.00" required>
+        <input type="number" id="service_price" name="service_price" step="1.00" required>
 
         <button type="submit">Register</button>
     </form>

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $to = $email;
         $subject = "Recupercao de senha";
         $message = "Sua senha atual e: " . $user['password'];
-        $headers = "From: no-reply@phpwebii.com";
+        $headers = "From: smtp.gmail.com";
 
         if (mail($to, $subject, $message, $headers)) {
             echo "<p>Enviado com sucesso e-mail para $email.</p>";
