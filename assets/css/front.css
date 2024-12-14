@@ -113,7 +113,7 @@ footer p {
     background-image: url("../images/profession1.jpg");
   }
 }
-*/ body {
+body {
   animation-duration: 15s;
   animation-name: slide-in;
   animation-iteration-count: infinite;

@@ -36,8 +36,6 @@ if (isset($_GET['id'])) {
     exit;
 }
 ?>
-
-<body>
 <main>
     <div class="profile-container">
         <h2><?php echo htmlspecialchars($profile['profession']); ?></h2>
@@ -66,5 +64,3 @@ if (isset($_GET['id'])) {
 
 <?php include 'includes/footer.php'; ?>
 
-</body>
-</html>

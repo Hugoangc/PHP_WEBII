@@ -1,6 +1,5 @@
 <?php include 'includes/header.php'; ?>
 
-<body>
 
 
     <main>
@@ -18,5 +17,3 @@
 
     <?php include 'includes/footer.php'; ?>
 
-</body>
-</html>

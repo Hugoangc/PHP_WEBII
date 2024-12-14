@@ -67,3 +67,5 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </tbody>
     </table>
 </main>
+
+<?php include 'includes/footer.php'; ?>
