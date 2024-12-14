@@ -11,12 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_name'] = $user['fullname'];
         $_SESSION['role'] = $user['role'];
 
         header("Location: dashboard.php");
         exit();
     } else {
-        $error = "Invalid credentials.";
+        $error = "Credenciaveis inválidas";
     }
 }
 ?>
