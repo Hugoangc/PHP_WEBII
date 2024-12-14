@@ -1,8 +1,8 @@
 <?php
-$host = 'cefet-web.mysql.uhserver.com';
-$db = 'cefet_web'; //nome do banco
-$user = 'webii'; 
-$pass = 'WEB11cefet@'; // senha do MySQL
+$host = '';
+$db = ''; //nome do banco
+$user = ''; 
+$pass = ''; // senha do MySQL
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
