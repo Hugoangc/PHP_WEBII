@@ -1,0 +1,120 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background: linear-gradient(120deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("assets/images/background.jpg") center/cover no-repeat;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  min-height: calc(100vh - 4rem);
+}
+
+.content-container {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.content-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.content-container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  color: #f0f0f0;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.cta-buttons a {
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.cta-buttons .register {
+  background: #28a745;
+}
+
+.cta-buttons .register:hover {
+  background: #218838;
+}
+
+.cta-buttons .login {
+  background: #007bff;
+}
+
+.cta-buttons .login:hover {
+  background: #0056b3;
+}
+
+.cta-buttons .view {
+  background: #ffc107;
+}
+
+.cta-buttons .view:hover {
+  background: #e0a800;
+}
+
+footer {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+}
+
+footer p {
+  margin: 0;
+}
+
+@keyframes slide-in {
+  0% {
+    background-image: url("../images/profession1.jpg");
+  }
+  33% {
+    background-image: url("../images/profession2.jpg");
+  }
+  66% {
+    background-image: url("../images/profession3.jpg");
+  }
+  100% {
+    background-image: url("../images/profession1.jpg");
+  }
+}
+*/ body {
+  animation-duration: 15s;
+  animation-name: slide-in;
+  animation-iteration-count: infinite;
+}
