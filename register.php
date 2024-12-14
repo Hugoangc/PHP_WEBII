@@ -6,7 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fullname = $_POST['fullname'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $profession = $_POST['profession'];
+
+
+    $profession = ucwords(strtolower(trim($_POST['profession'])));
     $location = $_POST['location'];
     $contact_info = $_POST['contact'];
     $service_name = $_POST['service_name'];

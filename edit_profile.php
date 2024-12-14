@@ -16,9 +16,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contact_info = $_POST['contact_info'];
     $bio = $_POST['bio'];
 
+    // $stmt = $pdo->prepare("UPDATE profiles SET profession = :profession, location = :location, contact_info = :contact_info, bio = :bio WHERE user_id = :user_id");
+    // $stmt->execute(['profession' => $profession, 'location' => $location, 'contact_info' => $contact_info, 'bio' => $bio, 'user_id' => $user_id]);
     $stmt = $pdo->prepare("UPDATE profiles SET profession = :profession, location = :location, contact_info = :contact_info, bio = :bio WHERE user_id = :user_id");
-    $stmt->execute(['profession' => $profession, 'location' => $location, 'contact_info' => $contact_info, 'bio' => $bio, 'user_id' => $user_id]);
+    $stmt->execute([
+        'profession' => $profession,
+        'location' => $location,
+        'contact_info' => $contact_info,
+        'bio' => $bio,
+        'user_id' => $user_id
+    ]);
 
+    $stmt = $pdo->prepare("UPDATE users SET fullname = :fullname WHERE id = :user_id");
+    $stmt->execute([
+        'fullname' => $fullname,
+        'user_id' => $user_id
+    ]);
+    
     if (!empty($_POST['password'])) {
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $stmt = $pdo->prepare("UPDATE users SET password = :password WHERE id = :user_id");
