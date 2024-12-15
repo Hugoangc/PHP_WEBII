@@ -69,50 +69,67 @@ $stmt->execute(['profile_id' => $profile_id]);
 $services = $stmt->fetchAll();
 
 ?>
-
+<link rel="stylesheet" href="assets/css/edit_services.css">
 <main>
-  <h2>Gerenciar Serviços</h2>
+    <h2>Gerenciar Serviços</h2>
 
-  <h3>Adicionar Novo Serviço</h3>
-  <form method="POST">
-      <label for="service_name">Nome do Serviço:</label>
-      <input type="text" id="service_name" name="service_name" required>
+    <section class="service-form">
+        <h3>Adicionar Novo Serviço</h3>
+        <form method="POST" class="form-container">
+            <label for="service_name">Nome do Serviço:</label>
+            <input type="text" id="service_name" name="service_name" required>
 
-      <label for="description">Descrição:</label>
-      <textarea id="description" name="description" required></textarea>
+            <label for="description">Descrição:</label>
+            <textarea id="description" name="description" required></textarea>
 
-      <label for="price">Preço:</label>
-      <input type="number" id="price" name="price" step="0.01" required>
+            <label for="price">Preço:</label>
+            <input type="number" id="price" name="price" step="0.01" required>
 
-      <button type="submit" name="add_service">Adicionar Serviço</button>
-  </form>
+            <button type="submit" name="add_service" class="btn btn-add">Adicionar Serviço</button>
+        </form>
+    </section>
 
-  <h3>Seus Serviços</h3>
-  <?php if (count($services) > 0): ?>
-      <ul>
-          <?php foreach ($services as $service): ?>
-              <li>
-                  <form method="POST" style="margin-bottom: 10px;">
-                      <input type="hidden" name="service_id" value="<?= $service['id'] ?>">
-                      
-                      <label for="service_name_<?= $service['id'] ?>">Nome do Serviço:</label>
-                      <input type="text" id="service_name_<?= $service['id'] ?>" name="service_name" value="<?= $service['service_name'] ?>" required>
+    <section class="service-list">
+        <h3>Seus Serviços</h3>
+        <?php if (count($services) > 0): ?>
+            <table class="service-table">
+                <thead>
+                    <tr>
+                        <th>Nome do Serviço</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($services as $service): ?>
+                        <tr>
+                            <form method="POST">
+                                <td>
+                                    <input type="hidden" name="service_id" value="<?= $service['id'] ?>">
+                                    <input type="text" name="service_name" value="<?= $service['service_name'] ?>" required>
+                                </td>
+                                <td>
+                                    <textarea name="description" required><?= $service['description'] ?></textarea>
+                                </td>
+                                <td>
+                                    <input type="number" name="price" step="0.01" value="<?= $service['price'] ?>" required>
+                                </td>
+                                <td>
+                                    <button type="submit" name="edit_service" class="btn btn-edit">Salvar</button>
+                                    <button type="submit" name="delete_service" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir este serviço?');">Excluir</button>
+                                </td>
+                            </form>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>Você ainda não adicionou nenhum serviço.</p>
+        <?php endif; ?>
+    </section>
+    <button onclick="window.history.back();" class="btn-secondary">Voltar</button>
 
-                      <label for="description_<?= $service['id'] ?>">Descrição:</label>
-                      <textarea id="description_<?= $service['id'] ?>" name="description" required><?= $service['description'] ?></textarea>
-
-                      <label for="price_<?= $service['id'] ?>">Preço:</label>
-                      <input type="number" id="price_<?= $service['id'] ?>" name="price" step="0.01" value="<?= $service['price'] ?>" required>
-
-                      <button type="submit" name="edit_service">Salvar Alterações</button>
-                      <button type="submit" name="delete_service" onclick="return confirm('Tem certeza que deseja excluir este serviço?');">Excluir Serviço</button>
-                  </form>
-              </li>
-          <?php endforeach; ?>
-      </ul>
-  <?php else: ?>
-      <p>Você ainda não adicionou nenhum serviço.</p>
-  <?php endif; ?>
 </main>
 
 <?php include 'includes/footer.php'; ?>

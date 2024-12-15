@@ -36,29 +36,47 @@ if (isset($_GET['id'])) {
     exit;
 }
 ?>
+<link rel="stylesheet" href="profile.css">
 <main>
     <div class="profile-container">
-        <h2><?php echo htmlspecialchars($profile['profession']); ?></h2>
-        <h2><?php echo htmlspecialchars($profile['fullname']); ?></h2>
-        <p><strong>Profissão:</strong> <?php echo htmlspecialchars($profile['profession']); ?></p>
-        <p><strong>Bio:</strong> <?php echo htmlspecialchars($profile['bio']); ?></p>
-        <p><strong>Localização:</strong> <?php echo htmlspecialchars($profile['location']); ?></p>
-        <p><strong>Contato:</strong> <?php echo htmlspecialchars($profile['contact_info']); ?></p>
+        <div class="profile-header">
+            <h2><?php echo htmlspecialchars($profile['fullname']); ?></h2>
+            <p class="profession"><?php echo htmlspecialchars($profile['profession']); ?></p>
+        </div>
+        
+        <div class="profile-info">
+            <p><strong>Bio:</strong> <?php echo htmlspecialchars($profile['bio']); ?></p>
+            <p><strong>Localização:</strong> <?php echo htmlspecialchars($profile['location']); ?></p>
+            <p><strong>Contato:</strong> <?php echo htmlspecialchars($profile['contact_info']); ?></p>
+        </div>
 
-        <h3>Serviços</h3>
-        <?php if (count($services) > 0): ?>
-            <ul>
-                <?php foreach ($services as $service): ?>
-                    <li>
-                        <strong>Serviço:</strong> <?php echo htmlspecialchars($service['service_name']); ?><br>
-                        <strong>Descrição:</strong> <?php echo htmlspecialchars($service['description']); ?><br>
-                        <strong>Preço:</strong> $<?php echo htmlspecialchars($service['price']); ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php else: ?>
-            <p>Nenhum serviço para esse perfil.</p>
-        <?php endif; ?>
+        <div class="profile-services">
+            <h3>Serviços Oferecidos</h3>
+            <?php if (count($services) > 0): ?>
+                <table class="service-table">
+                    <thead>
+                        <tr>
+                            <th>Serviço</th>
+                            <th>Descrição</th>
+                            <th>Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($services as $service): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($service['service_name']); ?></td>
+                                <td><?php echo htmlspecialchars($service['description']); ?></td>
+                                <td>R$ <?php echo htmlspecialchars($service['price']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>Nenhum serviço para esse perfil.</p>
+            <?php endif; ?>
+        </div>
+        
+        <button onclick="window.history.back();" class="btn-secondary">Voltar</button>
     </div>
 </main>
 

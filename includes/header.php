@@ -17,7 +17,7 @@ session_start();
             <a href="index.php">Home</a>
             <a href="list_professionals.php">Profissionais</a>
             <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="dashboard.php">Dashboard</a>
+                <a href="dashboard.php">Perfil</a>
                 <a href="logout.php">Logout</a>
             <?php else: ?>
                 <a href="login.php">Login</a>

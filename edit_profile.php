@@ -56,8 +56,8 @@ $stmt = $pdo->prepare("SELECT p.*, u.fullname FROM profiles p JOIN users u ON p.
 $stmt->execute(['user_id' => $user_id]);
 $profile = $stmt->fetch();
 ?>
-<main>
     <link rel="stylesheet" href="assets/css/edit_profile.css">
+<main>
     <h2>Edit Profile</h2>
     <form method="POST" action="" class="profile-form">
         <div class="form-group">

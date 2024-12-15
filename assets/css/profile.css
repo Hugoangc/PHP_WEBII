@@ -1,21 +1,115 @@
+/* Reset Básico */
 body {
-  background-color: #eef;
   font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
 }
-header {
-  background-color: #333;
-  color: white;
-  padding: 10px;
-  text-align: center;
-}
+
+/* Container Principal */
 main {
+  width: 80%;
+  margin: 20px auto;
   padding: 20px;
-  display: flex;
-  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+/* Cabeçalhos */
+h2,
+h3 {
+  text-align: center;
+  color: #333;
+}
+
+/* Informações do Perfil */
 .profile-container {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.profile-container p {
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+.profile-container strong {
+  color: #4caf50;
+}
+
+/* Tabela de Serviços */
+.service-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.service-table th,
+.service-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 1.1em;
+}
+
+.service-table th {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.service-table td {
+  background-color: #fff;
+}
+
+.service-table tr:nth-child(even) td {
+  background-color: #f4f4f9;
+}
+
+.service-table tr:hover {
+  background-color: #e0f7e0;
+}
+
+.service-table .service-name {
+  font-weight: bold;
+}
+
+.service-table .price {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* Botões de Navegação */
+.btn-secondary {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #45a049;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .service-table th,
+  .service-table td {
+    font-size: 0.9em;
+    padding: 8px 10px;
+  }
+
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
 }

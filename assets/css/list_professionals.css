@@ -1,37 +1,104 @@
+/* Reset Básico */
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
   background-color: #f8f9fa;
+  color: #333;
 }
-header {
-  text-align: center;
-  background-color: #343a40;
-  color: white;
-  padding: 15px;
-}
-main {
+
+/* Área Principal */
+main.list-professionals {
+  max-width: 1100px;
+  margin: 30px auto;
   padding: 20px;
-  max-width: 800px;
-  margin: auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-form {
+
+/* Cabeçalho */
+h2 {
+  text-align: center;
+  font-size: 1.8em;
+  color: #4caf50;
   margin-bottom: 20px;
 }
-form label,
-form select,
-form button {
+
+/* Formulário de Filtro */
+.filter-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+
+.filter-form label {
+  font-weight: bold;
   margin-right: 10px;
 }
-ul {
-  list-style: none;
-  padding: 0;
+
+.filter-form select,
+.filter-form button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
 }
-ul li {
-  margin-bottom: 10px;
+
+.filter-form button {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-ul li a {
+
+.filter-form button:hover {
+  background-color: #45a049;
+}
+
+/* Tabela */
+.professionals-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 0.9em;
+}
+
+.professionals-table thead th {
+  background-color: #4caf50;
+  color: white;
+  text-align: left;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.professionals-table tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Linhas alternadas */
+.professionals-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover */
+.professionals-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Links */
+.profile-link {
+  color: #2196f3;
   text-decoration: none;
-  color: #007bff;
 }
-ul li a:hover {
+
+.profile-link:hover {
   text-decoration: underline;
 }

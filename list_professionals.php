@@ -24,12 +24,12 @@ if ($filter_profession) {
 
 $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+<link rel="stylesheet" href="list_professionals.css">
+<main class="list-professionals">
+    <h2>Lista de Profissionais</h2>
 
-<main>
-    <h2>List of Professionals</h2>
-
-    <form method="GET" action="list_professionals.php">
-        <label for="profession">Filtro por profissão</label>
+    <form method="GET" action="list_professionals.php" class="filter-form">
+        <label for="profession">Filtrar por profissão:</label>
         <select id="profession" name="profession">
             <option value="">Todas</option>
             <?php foreach ($professions as $prof): ?>
@@ -39,33 +39,33 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </option>
             <?php endforeach; ?>
         </select>
-        <button type="submit">Filtrar</button>
+        <button type="submit" class="btn btn-filter">Filtrar</button>
     </form>
 
-    <table>
+    <table class="professionals-table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Nome</th>
                 <th>Profissão</th>
                 <th>Localização</th>
-                <th>Contacto</th>
+                <th>Contato</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($professionals as $prof): ?>
                 <tr>
-                <td>
-                    <a href="profiles.php?id=<?= htmlspecialchars($prof['id']) ?>">
-                        <?= htmlspecialchars($prof['fullname']) ?>
-                    </a>
-                </td>
+                    <td>
+                        <a href="profiles.php?id=<?= htmlspecialchars($prof['id']) ?>" class="profile-link">
+                            <?= htmlspecialchars($prof['fullname']) ?>
+                        </a>
+                    </td>
                     <td><?= htmlspecialchars($prof['profession']) ?></td>
                     <td><?= htmlspecialchars($prof['location'] ?? 'N/A') ?></td>
                     <td><?= htmlspecialchars($prof['contact_info'] ?? 'N/A') ?></td>
+                    
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </main>
-
 <?php include 'includes/footer.php'; ?>
