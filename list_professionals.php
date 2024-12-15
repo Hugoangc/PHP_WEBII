@@ -31,7 +31,7 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <form method="GET" action="list_professionals.php">
         <label for="profession">Filtro por profissão</label>
         <select id="profession" name="profession">
-            <option value="">All</option>
+            <option value="">Todas</option>
             <?php foreach ($professions as $prof): ?>
                 <option value="<?= htmlspecialchars($prof['profession']) ?>" 
                         <?= $filter_profession == $prof['profession'] ? 'selected' : '' ?>>
@@ -39,16 +39,16 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </option>
             <?php endforeach; ?>
         </select>
-        <button type="submit">Filter</button>
+        <button type="submit">Filtrar</button>
     </form>
 
     <table>
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Profession</th>
-                <th>Location</th>
-                <th>Contact Info</th>
+                <th>Profissão</th>
+                <th>Localização</th>
+                <th>Contacto</th>
             </tr>
         </thead>
         <tbody>
