@@ -4,24 +4,28 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="assets/css/front.css">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProFácil</title>
-    <link rel="stylesheet" href="assets/css/front.css">
 </head>
 <body>
     <header>
-        <h1>ProFácil</h1>
-        <nav>
-            <a href="index.php">Home</a>
-            <a href="list_professionals.php">Profissionais</a>
+        <img class="logo" src="assets/images/logo.png" alt="ProFácil">
+            <div class="menu">
+                <a href="index.php"><h1>Home</h1></a>
+                <a href="list_professionals.php"><h1>Profissionais</h1></a>
+            </div>
+            <div class="buttons">
             <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="dashboard.php">Perfil</a>
-                <a href="logout.php">Logout</a>
+                <button class="login"><a href="dashboard.php"><h1>Perfil</h1></a></button>
+                <button class="register"><a href="logout.php"><h1>Logout</h1></a></button>
             <?php else: ?>
-                <a href="login.php">Login</a>
-                <a href="register.php">Register</a>
+                <button class="login"><a href="login.php"><h1>Login</h1></a></button>
+                <button class="register"><a href="register.php"><h1>Register</h1></a></button>
             <?php endif; ?>
-        </nav>
+            </div>
+
     </header>

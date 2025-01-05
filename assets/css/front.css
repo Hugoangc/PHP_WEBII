@@ -12,15 +12,115 @@ body {
 }
 
 header {
-  background: #333;
+  background: #020305;
   color: #fff;
-  padding: 1rem;
   text-align: center;
+  display: flex;
+  justify-content: space-between; /* Distribui o espaço entre os elementos */
+  align-items: center; /* Alinha os itens verticalmente ao centro */
+  padding: 1rem; /* Adiciona padding ao header */
+  height: 2rem;
 }
+
+header a {
+  text-decoration: none; /* Remove o sublinhado */
+  color: white; /* Define a cor do texto */
+}
+
+header a:visited {
+  color: white; /* Define a cor do texto após o link ser visitado */
+}
+
+header a:hover {
+  color: #58AFB8; /* Define a cor do texto ao passar o mouse */
+}
+
+header a:active {
+  color: #58AFB8; /* Define a cor do texto ao clicar */
+}
+
+.login a {
+  text-decoration: none; /* Remove o sublinhado */
+  color: white; /* Define a cor do texto */
+}
+
+.login a:visited {
+  color: white; /* Define a cor do texto após o link ser visitado */
+}
+
+.login a:hover {
+  color: #fff; /* Define a cor do texto ao passar o mouse */
+}
+
+.login a:active {
+  color: #ccc; /* Define a cor do texto ao clicar */
+}
+
+.register a {
+  text-decoration: none; /* Remove o sublinhado */
+  color: white; /* Define a cor do texto */
+}
+
+.register a:visited {
+  color: white; /* Define a cor do texto após o link ser visitado */
+}
+
+.register a:hover {
+  color: #fff; /* Define a cor do texto ao passar o mouse */
+}
+
+.register a:active {
+  color: #ccc; /* Define a cor do texto ao clicar */
+}
+
+.logo{
+  width: 100px;
+  height: auto;
+}
+
+.login, .register {
+  display: inline-block; /* Ajusta o tamanho ao conteúdo */
+  padding: 0.5rem 1rem; /* Adiciona padding aos elementos */
+  border-radius: 5px;
+  color: white;
+}
+
+
+.login {
+  background-color: #269199;
+}
+
+.register {
+  background-color: transparent;
+  border: 1px solid #269199; /* Adiciona uma borda ao register */
+}
+
+
+
+.menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  gap: 6rem;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: rem;
+  gap: 1rem;
+}
+
+
+
 
 header h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
 
 main {
@@ -29,74 +129,100 @@ main {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 2rem;
+  padding: 0;
+  margin: 0;
   min-height: calc(100vh - 4rem);
+  background-color: #F5F5F5;
 }
 
-.content-container {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.content-container h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.content-container p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  max-width: 600px;
-  color: #f0f0f0;
-}
-
-.cta-buttons {
+.cta1{
   display: flex;
-  gap: 1rem;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 4 rem;
+  width: 100%;
+  background-color: white;
 }
 
-.cta-buttons a {
-  text-decoration: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+.cta1-text, .cta1-image {
+  flex: 1; /* Distribui o espaço igualmente entre os elementos */
+  padding: 4rem;
+  height: 100%;
+}
+
+.cta1-text{
+  display: flex;
+  flex-direction: column;
+  justify-content:  space-between;
+  text-align: justify;
+  gap: 8rem;
+  height: 100%;
+}
+
+.cta1-text h1{
+  color: #EC225E;
+  font-size: 2rem;
+}
+
+.cta1-text p{
+  color: #020305;
+  font-size:medium;
+}
+
+.cta1-text button{
+  background-color: #269199;
+  color: white;
+  padding: 1rem;
+  border: none;
   border-radius: 5px;
-  color: #fff;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  font-size: 1.5rem;
 }
 
-.cta-buttons .register {
-  background: #28a745;
-}
-
-.cta-buttons .register:hover {
-  background: #218838;
-}
-
-.cta-buttons .login {
-  background: #007bff;
-}
-
-.cta-buttons .login:hover {
-  background: #0056b3;
-}
-
-.cta-buttons .view {
-  background: #ffc107;
-}
-
-.cta-buttons .view:hover {
-  background: #e0a800;
+.cta1-image img {
+  width: 350px;
+  height: auto;
+  object-fit: cover;
 }
 
 footer {
-  background: #333;
-  color: #fff;
+  background: #fff;
+  color: #000;
   text-align: center;
   padding: 1rem;
   position: relative;
+}
+
+.services {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 4rem;
+  gap: 3rem;
+}
+
+.services-cards{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 3rem;
+}
+
+.services-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+}
+
+.services-card img{
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 footer p {
@@ -121,4 +247,63 @@ footer p {
   animation-duration: 15s;
   animation-name: slide-in;
   animation-iteration-count: infinite;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: justify;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 50%;
+  margin-bottom: 2rem;
+}
+
+form label {
+  font-size: 1.5rem;
+}
+
+form input {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  background-color: #269199;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.professionals-table{
+  background-color: #fff;
+}
+
+.professionals-table th, .professionals-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.professionals-table a {
+  text-decoration: none; /* Remove o sublinhado */
+  color: #58AFB8; /* Define a cor do texto */
+}
+
+.professionals-table a:visited {
+  color: #58AFB8; /* Define a cor do texto após o link ser visitado */
+}
+
+.professionals-table a:hover {
+  color: #58AFB8; /* Define a cor do texto ao passar o mouse */
+}
+
+.professionals-table a:active {
+  color: #58AFB8; /* Define a cor do texto ao clicar */
 }
