@@ -1,0 +1,29 @@
+.chat-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 600px; /* Aumentei a altura para 600px */
+  overflow-y: auto;
+  margin-bottom: 20px; /* Espaço extra abaixo */
+}
+
+.message-sent {
+  text-align: right;
+  background-color: #d1ffd6;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.message-received {
+  text-align: left;
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.timestamp {
+  display: block;
+  font-size: 0.8em;
+  color: #777;
+}
