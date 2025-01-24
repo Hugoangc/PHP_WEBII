@@ -78,6 +78,8 @@ if (isset($_GET['id'])) {
         
         <button onclick="window.history.back();" class="btn-secondary">Voltar</button>
     </div>
+    <a href="chat.php?id=<?php echo $profile['user_id']; ?>" class="btn-primary">Iniciar Chat</a>
+
 </main>
 
 <?php include 'includes/footer.php'; ?>
