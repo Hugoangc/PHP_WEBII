@@ -22,12 +22,13 @@ if (isset($_GET['id'])) {
     }
 
     $stmt_services = $pdo->prepare("
-    SELECT service_name, description, price
+    SELECT id, service_name, description, price
     FROM services
-    WHERE profile_id = :id");
-    $stmt_services->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt_services->execute();
-    $services = $stmt_services->fetchAll(PDO::FETCH_ASSOC);
+    WHERE profile_id = :id
+    ");
+$stmt_services->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt_services->execute();
+$services = $stmt_services->fetchAll(PDO::FETCH_ASSOC);
     if ($services === false) {
         $services = [];
     }
@@ -67,7 +68,8 @@ if (isset($_GET['id'])) {
                                 <td><?php echo htmlspecialchars($service['service_name']); ?></td>
                                 <td><?php echo htmlspecialchars($service['description']); ?></td>
                                 <td>R$ <?php echo htmlspecialchars($service['price']); ?></td>
-                            </tr>
+                                <td><a href="checkout.php?service_id=<?php echo $service['id']; ?>" class="btn btn-primary">Contratar</a></td>
+                                </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
