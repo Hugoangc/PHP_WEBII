@@ -69,7 +69,7 @@ $stmt->execute(['profile_id' => $profile_id]);
 $services = $stmt->fetchAll();
 
 ?>
-<link rel="stylesheet" href="assets/css/edit_services.css">
+<link rel="stylesheet" href="assets/css/profile.css">
 <main>
     <h2>Gerenciar Serviços</h2>
 

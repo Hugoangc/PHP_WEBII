@@ -79,5 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <button type="submit">Register</button>
     </form>
+
+    <a href="login.php">Já possui uma conta?</a>
 </main>
 <?php include 'includes/footer.php'; ?>

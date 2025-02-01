@@ -30,6 +30,7 @@ $stmt = $pdo->prepare("
 $stmt->execute(['user_id' => $user_id]);
 $conversations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+<link rel="stylesheet" href="assets/css/conversation.css">
 <main>
     <h2>Minhas Conversas</h2>
     <div class="conversation-list">
@@ -47,6 +48,7 @@ $conversations = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <p>Você ainda não tem conversas ativas.</p>
         <?php endif; ?>
     </div>
+    <button onclick="window.history.back();" class="btn-secondary">Voltar</button>
 </main>
 
 <?php include 'includes/footer.php'; ?>

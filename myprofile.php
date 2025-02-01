@@ -68,7 +68,6 @@ $services = $stmt_services->fetchAll(PDO::FETCH_ASSOC);
                                 <td><?php echo htmlspecialchars($service['service_name']); ?></td>
                                 <td><?php echo htmlspecialchars($service['description']); ?></td>
                                 <td>R$ <?php echo htmlspecialchars($service['price']); ?></td>
-                                <td><a href="checkout.php?service_id=<?php echo $service['id']; ?>" class="btn btn-primary">Contratar</a></td>
                                 </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -78,12 +77,8 @@ $services = $stmt_services->fetchAll(PDO::FETCH_ASSOC);
             <?php endif; ?>
         </div>
         <br><br>
-        <div class="buttons">
-            <button onclick="window.history.back();" class="btn-secondary">Voltar</button>
-            <a href="chat.php?id=<?php echo $profile['user_id']; ?>" class="btn-secondary"><button>Iniciar Chat</button></a>
-        </div>
+        <button onclick="window.history.back();" class="btn-secondary">Voltar</button>
     </div>
-    
 
 </main>
 

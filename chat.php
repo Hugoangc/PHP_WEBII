@@ -103,27 +103,118 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     });
 </script>
 <style>
-    .message-sent {
-        text-align: right;
-        background-color: #d1ffd6;
-        padding: 10px;
-        margin: 5px;
-        border-radius: 10px;
-    }
+    /* Estilo geral */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 
-    .message-received {
-        text-align: left;
-        background-color: #f1f1f1;
-        padding: 10px;
-        margin: 5px;
-        border-radius: 10px;
-    }
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-    .timestamp {
-        display: block;
-        font-size: 0.8em;
-        color: #777;
-    }
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Estilo da lista de mensagens */
+.message-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.message-sent {
+  text-align: right;
+  background-color: #d1ffd6;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  max-width: 70%;
+  align-self: flex-end;
+}
+
+.message-received {
+  text-align: left;
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  max-width: 70%;
+  align-self: flex-start;
+}
+
+.timestamp {
+  display: block;
+  font-size: 0.8em;
+  color: #777;
+  margin-top: 5px;
+}
+
+/* Estilo do formulário de envio */
+.chat-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.chat-form input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-form input[type="text"]:focus {
+  border-color: #269199;
+  box-shadow: 0 0 5px rgba(38, 145, 153, 0.5);
+  outline: none;
+}
+
+.chat-form button {
+  background-color: #269199;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.chat-form button:hover {
+  background-color: #1e7a8c;
+}
+
+.chat-form button:active {
+  background-color: #155d6e;
+}
+
+.chat-form button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(72, 187, 120, 0.5);
+}
 </style>
 
 <?php include 'includes/footer.php'; ?>

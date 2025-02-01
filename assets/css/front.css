@@ -307,3 +307,8 @@ form button {
 .professionals-table a:active {
   color: #58AFB8; /* Define a cor do texto ao clicar */
 }
+
+.profile-info{
+  text-align: justify;
+}
+

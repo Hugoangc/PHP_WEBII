@@ -1,10 +1,8 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  margin: 0;
-  padding: 0;
+  text-align: justify; /* Justifica o texto de toda a página */
 }
 
+/* Container Principal */
 main {
   width: 80%;
   margin: 20px auto;
@@ -15,78 +13,57 @@ main {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-h2, h3 {
-  text-align: center;
-}
-
-.service-form, .service-list {
+.profile-info {
   margin: 20px 0;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  text-align: justify; /* Justifica o texto dentro do contêiner do perfil */
 }
 
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.profile-info p {
+  font-size: 1.1em;
+  margin: 10px 0;
 }
 
-.form-container input, 
-.form-container textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
+.profile-container strong {
+  color: #4caf50;
 }
 
 .service-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: justify; /* Justifica o texto dentro da tabela de serviços */
 }
 
-.service-table th, .service-table td {
+.service-table th,
+.service-table td {
+  padding: 12px 15px;
+  text-align: left; /* Alinha o texto das células à esquerda */
   border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
+  font-size: 1.1em;
+}
+button, .btn-secondary {
+  background-color: #269199; /* Cor de fundo */
+  color: white; /* Cor do texto */
+  padding: 10px 20px; /* Espaçamento interno */
+  border: none; /* Remove a borda padrão */
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  font-size: 1em; /* Tamanho da fonte */
+  transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
 }
 
-.service-table th {
-  background-color: #f4f4f9;
+button:hover, .btn-secondary:hover {
+  background-color: #269199; /* Cor de fundo ao passar o mouse */
 }
 
-.service-table input,
-.service-table textarea {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+button:active, .btn-secondary:active {
+  background-color: #269199; /* Cor de fundo ao clicar */
 }
 
-.btn {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn-add {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.btn-edit {
-  background-color: #2196F3;
-  color: white;
-}
-
-.btn-delete {
-  background-color: #f44336;
-  color: white;
-}
-
-.btn:hover {
-  opacity: 0.8;
+button:focus, .btn-secondary:focus {
+  outline: none; /* Remove o contorno ao focar */
+  box-shadow: 0 0 0 2px rgba(72, 187, 120, 0.5); /* Adiciona um contorno suave ao focar */
 }
