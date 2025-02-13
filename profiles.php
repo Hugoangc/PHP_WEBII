@@ -133,11 +133,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     </thead>
                     <tbody>
                         <?php foreach ($services as $service): ?>
+                            <?php $logged_user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;?>
                             <tr>
                                 <td><?php echo htmlspecialchars($service['service_name']); ?></td>
                                 <td><?php echo htmlspecialchars($service['description']); ?></td>
                                 <td>R$ <?php echo htmlspecialchars($service['price']); ?></td>
-                                <td><a href="checkout.php?service_id=<?php echo $service['id']; ?>" class="btn btn-primary">Contratar</a></td>
+                                <?php if ($logged_user_id !== $profile['user_id']): ?>
+                            <td><a href="checkout.php?service_id=<?php echo $service['id']; ?>" class="btn btn-primary">Contratar</a></td>
+                        <?php endif; ?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
