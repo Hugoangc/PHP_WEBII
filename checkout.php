@@ -1,6 +1,6 @@
 <?php
-
 include 'includes/header.php';
+
 if (!isset($_GET['service_id'])) {
     echo "Serviço não especificado.";
     exit;
@@ -16,6 +16,17 @@ if (!$service) {
     exit;
 }
 
+// Obtendo as informações do usuário logado
+$user_id = $_SESSION['user_id']; // ID do usuário logado
+$stmt_user = $pdo->prepare("SELECT fullname FROM users WHERE id = :user_id");
+$stmt_user->execute(['user_id' => $user_id]);
+$user = $stmt_user->fetch(PDO::FETCH_ASSOC);
+
+if (!$user) {
+    echo "Usuário não encontrado.";
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $card_number = trim($_POST['card_number']);
     $card_name = trim($_POST['card_name']);
@@ -23,25 +34,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cvv = trim($_POST['cvv']);
 
     if (strlen($card_number) === 16 && ctype_digit($card_number) && !empty($card_name) && strlen($cvv) === 3) {
-      // Salvar pedido no banco de dados
-      $stmt_order = $pdo->prepare("
-          INSERT INTO orders (user_id, service_id, payment_status) 
-          VALUES (:user_id, :service_id, 'pago')
-      ");
-      $stmt_order->execute([
-          'user_id' => $_SESSION['user_id'], // Assumindo que o ID do usuário logado está na sessão
-          'service_id' => $service_id
-      ]);
-  
-      echo "<p>Pagamento validado com sucesso! Serviço contratado.</p>";
-  } else {
-      echo "<p>Erro: Dados do cartão inválidos.</p>";
-  }
+        // Salvar pedido no banco de dados com detalhes completos (nome e preço do serviço)
+        $stmt_order = $pdo->prepare("
+            INSERT INTO orders (user_id, service_id, payment_status, service_name, service_price) 
+            VALUES (:user_id, :service_id, 'pago', :service_name, :service_price)
+        ");
+        $stmt_order->execute([
+            'user_id' => $user_id, // ID do usuário logado
+            'service_id' => $service_id,
+            'service_name' => $service['service_name'],
+            'service_price' => $service['price']
+        ]);
+
+        // Exibir confirmação de pagamento
+        echo "<div class='transaction-summary'>";
+        echo "<h3>Resumo da Transação</h3>";
+        echo "<p><strong>Serviço:</strong> " . htmlspecialchars($service['service_name']) . "</p>";
+        echo "<p><strong>Valor:</strong> R$ " . number_format($service['price'], 2, ',', '.') . "</p>";
+        echo "<p><strong>Usuário:</strong> " . htmlspecialchars($user['fullname']) . "</p>";
+        echo "<p><strong>Status do pagamento:</strong> Pago</p>";
+        echo "</div>";
+        exit;
+    } else {
+        echo "<p>Erro: Dados do cartão inválidos.</p>";
+    }
 }
 ?>
 
 <main>
-<h2>Checkout - <?php echo htmlspecialchars($service['service_name']); ?></h2>
+    <link rel="stylesheet" href="assets/css/checkout.css">
+
+    <h2>Checkout - <?php echo htmlspecialchars($service['service_name']); ?></h2>
+    
+    <p><strong>Serviço:</strong> <?php echo htmlspecialchars($service['service_name']); ?></p>
+    <p><strong>Valor:</strong> R$ <?php echo number_format($service['price'], 2, ',', '.'); ?></p>
+    <p><strong>Usuário:</strong> <?php echo htmlspecialchars($user['fullname']); ?></p>
+
     <form method="POST" action="">
         <label for="card_number">Número do Cartão:</label>
         <input type="text" name="card_number" id="card_number" maxlength="16" required>
@@ -57,8 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Validar Pagamento</button>
     </form>
-    <button onclick="window.history.back();" class="btn-secondary">Voltar</button>
 
+    <button onclick="window.history.back();" class="btn-secondary">Voltar</button>
 </main>
 
 <?php include 'includes/footer.php'; ?>

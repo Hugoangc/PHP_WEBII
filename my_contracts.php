@@ -3,7 +3,7 @@ include 'includes/header.php';
 
 $stmt = $pdo->prepare("
     SELECT orders.id AS order_id, services.service_name, services.description, services.price, 
-           profiles.profession, users.fullname AS provider_name, orders.created_at
+           profiles.profession, users.fullname AS provider_name, users.id AS provider_id, orders.created_at
     FROM orders
     INNER JOIN services ON orders.service_id = services.id
     INNER JOIN profiles ON services.profile_id = profiles.id
@@ -35,7 +35,11 @@ $my_contracts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <tr>
                         <td><?php echo htmlspecialchars($contract['service_name']); ?></td>
                         <td><?php echo htmlspecialchars($contract['profession']); ?></td>
-                        <td><?php echo htmlspecialchars($contract['provider_name']); ?></td>
+                        <td>
+                            <a href="profiles.php?id=<?php echo htmlspecialchars($contract['provider_id']); ?>">
+                                <?php echo htmlspecialchars($contract['provider_name']); ?>
+                            </a>
+                        </td>
                         <td>R$ <?php echo htmlspecialchars($contract['price']); ?></td>
                         <td><?php echo htmlspecialchars($contract['created_at']); ?></td>
                     </tr>

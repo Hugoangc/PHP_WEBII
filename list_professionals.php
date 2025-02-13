@@ -1,21 +1,27 @@
 <?php
 include 'includes/header.php';
 
+// Obter o filtro de profissão, se houver
 $filter_profession = isset($_GET['profession']) ? $_GET['profession'] : null;
 
+// Obter todas as profissões disponíveis para o filtro
 $professions_stmt = $pdo->query("SELECT DISTINCT profession FROM profiles");
 $professions = $professions_stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Construir a consulta para obter os profissionais, excluindo 'user' e 'admin'
 $query = "SELECT users.id, users.fullname, profiles.profession, profiles.location, profiles.contact_info 
           FROM users 
-          JOIN profiles ON users.id = profiles.user_id";
+          JOIN profiles ON users.id = profiles.user_id
+          WHERE users.role = 'professional'";  // Excluir usuários 'user' e 'admin'
 
 if ($filter_profession) {
-    $query .= " WHERE profiles.profession = :profession";
+    // Se houver filtro de profissão, adicionar à consulta
+    $query .= " AND profiles.profession = :profession";
 }
 
 $stmt = $pdo->prepare($query);
 
+// Executar a consulta com ou sem o filtro de profissão
 if ($filter_profession) {
     $stmt->execute(['profession' => $filter_profession]);
 } else {
@@ -24,7 +30,9 @@ if ($filter_profession) {
 
 $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <link rel="stylesheet" href="list_professionals.css">
+
 <main class="list-professionals">
     <h2>Lista de Profissionais</h2>
 
@@ -62,10 +70,10 @@ $professionals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= htmlspecialchars($prof['profession']) ?></td>
                     <td><?= htmlspecialchars($prof['location'] ?? 'N/A') ?></td>
                     <td><?= htmlspecialchars($prof['contact_info'] ?? 'N/A') ?></td>
-                    
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </main>
+
 <?php include 'includes/footer.php'; ?>

@@ -1,0 +1,22 @@
+.transaction-summary {
+    width: 50%; /* Ajuste a largura conforme necessário */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    padding: 20px;
+    background-color: #f9f9f9; /* Cor de fundo suave */
+    border: 1px solid #ccc; /* Bordas sutis */
+    border-radius: 8px; /* Bordas arredondadas */
+    text-align: center;
+}
+
+.transaction-summary h3 {
+    margin-bottom: 20px;
+}
+
+.transaction-summary p {
+    font-size: 1.1em;
+    margin: 10px 0;
+}
+
+button {
+    margin-top: 20px;
+}

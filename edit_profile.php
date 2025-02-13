@@ -2,7 +2,7 @@
 include 'includes/header.php'; 
 
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'professional') {
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
@@ -56,8 +56,9 @@ $stmt = $pdo->prepare("SELECT p.*, u.fullname FROM profiles p JOIN users u ON p.
 $stmt->execute(['user_id' => $user_id]);
 $profile = $stmt->fetch();
 ?>
-    <link rel="stylesheet" href="assets/css/front.css">
 <main>
+<link rel="stylesheet" href="assets/css/front.css">
+
     <h2>Edit Profile</h2>
     <form method="POST" action="" class="profile-form">
         <div class="form-group">

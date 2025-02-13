@@ -4,7 +4,7 @@ include 'includes/header.php';
 // serviços contratados de você
 $stmt = $pdo->prepare("
     SELECT orders.id AS order_id, services.service_name, services.description, services.price, 
-           users.fullname AS client_name, orders.created_at
+           users.fullname AS client_name, orders.created_at, profiles.id AS profile_id, users.id AS client_id
     FROM orders
     INNER JOIN services ON orders.service_id = services.id
     INNER JOIN profiles ON services.profile_id = profiles.id
@@ -35,7 +35,7 @@ $received_contracts = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <tr>
             <td><?php echo htmlspecialchars($contract['service_name']); ?></td>
             <td>
-                <a href="profile.php?id=<?php echo htmlspecialchars($contract['order_id']); ?>">
+                <a href="profiles.php?id=<?php echo htmlspecialchars($contract['client_id']); ?>">
                     <?php echo htmlspecialchars($contract['client_name']); ?>
                 </a>
             </td>
@@ -43,8 +43,7 @@ $received_contracts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <td><?php echo htmlspecialchars($contract['created_at']); ?></td>
         </tr>
     <?php endforeach; ?>
-</tbody>
-
+    </tbody>
         </table>
     <?php else: ?>
         <p>Nenhum serviço foi contratado de você.</p>

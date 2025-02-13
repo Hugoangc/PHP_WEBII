@@ -22,17 +22,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Configurações do servidor SMTP
             $mail->SMTPDebug = SMTP::DEBUG_OFF;                      // Habilitar saída de debug
             $mail->isSMTP();                                            // Enviar usando SMTP
-            $mail->Host       = 'smtp';                        // Servidor SMTP
+            $mail->Host       = 'smtp.gmail.com';                        // Servidor SMTP
             $mail->SMTPAuth   = true;                                    // Habilitar autenticação SMTP
-            $mail->Username   = '';                  // Usuário SMTP
-            $mail->Password   = 'senha';                                // Senha SMTP
+            $mail->Username   = 'cefetwebii@gmail.com';                  // Usuário SMTP
+            $mail->Password   = 'nmyr dfif cboh gjsd';                                // Senha SMTP
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Habilitar encriptação TLS implícita
-            $mail->Port       = 465;                                     
+            $mail->Port       = 465;                                      
 
             // Destinatário
-            $mail->setFrom('ss@gmail.com', 'Mailer');
+            $mail->setFrom('cefetwebii@gmail.com', 'Mailer');
             $mail->addAddress($email);                                  
-            $mail->addReplyTo('email@gm.com', 'Information');
+            $mail->addReplyTo('cefetwebii@gmail.com', 'Information');
             $resetLink = "http://localhost/PHP_WEBII/new_password.php?token=" . $token;
 
             // Conteúdo do e-mail

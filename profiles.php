@@ -1,11 +1,40 @@
 <?php
 include 'includes/header.php';
 
+function get_lat_long($cidade, $estado = null) {
+    $location = $estado ? $cidade . ', ' . $estado : $cidade;
+
+    $location = urlencode($location);
+
+    $url = "https://nominatim.openstreetmap.org/search?q={$location}&format=json&addressdetails=1&countrycodes=BR";
+
+    $options = [
+        "http" => [
+            "header" => "User-Agent: MeuApp/1.0 (meuemail@dominio.com)\r\n"
+        ]
+    ];
+    $context = stream_context_create($options);
+
+    $response = file_get_contents($url, false, $context);
+
+    if ($response) {
+        $data = json_decode($response, true);
+
+        if (!empty($data)) {
+            $latitude = $data[0]['lat'];
+            $longitude = $data[0]['lon'];
+
+            return array('latitude' => $latitude, 'longitude' => $longitude);
+        }
+    }
+
+    return null; 
+}
+
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']); 
 
-    $stmt = $pdo->prepare("
-        SELECT profiles.*, users.fullname, services.service_name, services.description, services.price 
+    $stmt = $pdo->prepare("SELECT profiles.*, users.fullname, users.role, services.service_name, services.description, services.price 
         FROM profiles
         LEFT JOIN users ON profiles.user_id = users.id
         LEFT JOIN services ON profiles.id = services.profile_id
@@ -22,22 +51,61 @@ if (isset($_GET['id'])) {
     }
 
     $stmt_services = $pdo->prepare("
-    SELECT id, service_name, description, price
-    FROM services
-    WHERE profile_id = :id
+        SELECT id, service_name, description, price
+        FROM services
+        WHERE profile_id = :id
     ");
-$stmt_services->bindParam(':id', $id, PDO::PARAM_INT);
-$stmt_services->execute();
-$services = $stmt_services->fetchAll(PDO::FETCH_ASSOC);
+    $stmt_services->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt_services->execute();
+    $services = $stmt_services->fetchAll(PDO::FETCH_ASSOC);
     if ($services === false) {
         $services = [];
     }
 } else {
-    echo "ID nao encontrado.";
+    echo "ID não encontrado.";
     exit;
 }
+
+$cidade = $profile['location']; 
+
+$location_parts = explode(',', $cidade);
+$city = trim($location_parts[0]);
+$state = isset($location_parts[1]) ? trim($location_parts[1]) : null;
+
+$coordenadas = get_lat_long($city, $state);
+
+if ($coordenadas) {
+    $latitude = $coordenadas['latitude'];
+    $longitude = $coordenadas['longitude'];
+} else {
+    $latitude = -23.550520; // São Paulo como fallback
+    $longitude = -46.633308; // São Paulo como fallback
+}
+
+$role = isset($profile['role']) ? $profile['role'] : 'user'; // Verifica o role do usuário no banco de dados
 ?>
+
 <link rel="stylesheet" href="assets/css/profile.css">
+
+<!-- Carregar Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var map = L.map('map').setView([<?php echo $latitude; ?>, <?php echo $longitude; ?>], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([<?php echo $latitude; ?>, <?php echo $longitude; ?>])
+        .addTo(map)
+        .bindPopup("<b><?php echo htmlspecialchars($profile['fullname']); ?></b><br /><?php echo htmlspecialchars($profile['location']); ?>")
+        .openPopup();
+});
+</script>
+
 <main>
     <div class="profile-container">
         <div class="profile-header">
@@ -51,9 +119,10 @@ $services = $stmt_services->fetchAll(PDO::FETCH_ASSOC);
             <p><strong>Contato:</strong> <?php echo htmlspecialchars($profile['contact_info']); ?></p>
         </div>
 
-        <div class="profile-services">
-            <h3>Serviços Oferecidos</h3>
-            <?php if (count($services) > 0): ?>
+        <!-- Verifica se há serviços -->
+        <?php if (count($services) > 0): ?>
+            <div class="profile-services">
+                <h3>Serviços Oferecidos</h3>
                 <table class="service-table">
                     <thead>
                         <tr>
@@ -69,14 +138,15 @@ $services = $stmt_services->fetchAll(PDO::FETCH_ASSOC);
                                 <td><?php echo htmlspecialchars($service['description']); ?></td>
                                 <td>R$ <?php echo htmlspecialchars($service['price']); ?></td>
                                 <td><a href="checkout.php?service_id=<?php echo $service['id']; ?>" class="btn btn-primary">Contratar</a></td>
-                                </tr>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-            <?php else: ?>
-                <p>Nenhum serviço para esse perfil.</p>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php else: ?>
+            <p>Este perfil não oferece serviços.</p>
+        <?php endif; ?>
+        
         <br><br>
         <div class="buttons">
             <button onclick="window.history.back();" class="btn-secondary">Voltar</button>
@@ -84,8 +154,8 @@ $services = $stmt_services->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
     
-
+    <!-- Mapa Exibido aqui -->
+    <div id="map" style="height: 400px; width: 100%;"></div>
 </main>
 
 <?php include 'includes/footer.php'; ?>
-
