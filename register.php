@@ -2,8 +2,6 @@
 include 'includes/header.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-
     try {
         // Inicia a transação
         $pdo->beginTransaction();
@@ -13,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = trim($_POST['email']);
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $role = trim($_POST['role']);
-        
+
         // Insere usuário na tabela users
         $sql = "INSERT INTO users (fullname, email, password, role, created_at) VALUES (:fullname, :email, :password, :role, NOW())";
         $stmt = $pdo->prepare($sql);
@@ -23,47 +21,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':password' => $password,
             ':role' => $role
         ]);
-        
+
         $user_id = $pdo->lastInsertId();
 
+        // Captura os dados do perfil (incluindo valores em branco para usuários comuns)
+        $profession = isset($_POST['profession']) ? trim($_POST['profession']) : '';
+        $location = isset($_POST['location']) ? trim($_POST['location']) : '';
+        $contact_info = isset($_POST['contact']) ? trim($_POST['contact']) : '';
 
-        // Se o usuário for um profissional, cria o perfil
-        if ($role === 'professional') {
-            // Captura os dados do perfil
-            $profession = !empty($_POST['profession']) ? trim($_POST['profession']) : null;
-            $location = !empty($_POST['location']) ? trim($_POST['location']) : null;
-            $contact_info = !empty($_POST['contact']) ? trim($_POST['contact']) : null;
-            
-            // Insere perfil na tabela profiles
-            $sql = "INSERT INTO profiles (user_id, profession, location, contact_info) VALUES (:user_id, :profession, :location, :contact_info)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                ':user_id' => $user_id,
-                ':profession' => $profession,
-                ':location' => $location,
-                ':contact_info' => $contact_info
-            ]);
-            
+        // Insere perfil na tabela profiles (sempre insere, independentemente do tipo de usuário)
+        $sql = "INSERT INTO profiles (user_id, profession, location, contact_info) VALUES (:user_id, :profession, :location, :contact_info)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':user_id' => $user_id,
+            ':profession' => $profession,
+            ':location' => $location,
+            ':contact_info' => $contact_info
+        ]);
+
+        // Se o usuário for profissional, pode adicionar serviço
+        if ($role === 'professional' && !empty($_POST['service_name']) && !empty($_POST['service_description']) && !empty($_POST['service_price'])) {
             $profile_id = $pdo->lastInsertId();
 
-            // Captura os dados do serviço (se houver)
-            if (!empty($_POST['service_name']) && !empty($_POST['service_description']) && !empty($_POST['service_price'])) {
-                $service_name = trim($_POST['service_name']);
-                $service_description = trim($_POST['service_description']);
-                $service_price = floatval($_POST['service_price']);
+            $service_name = trim($_POST['service_name']);
+            $service_description = trim($_POST['service_description']);
+            $service_price = floatval($_POST['service_price']);
 
-                // Insere serviço na tabela services
-                $sql = "INSERT INTO services (profile_id, service_name, description, price, created_at) VALUES (:profile_id, :service_name, :service_description, :service_price, NOW())";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([
-                    ':profile_id' => $profile_id,
-                    ':service_name' => $service_name,
-                    ':service_description' => $service_description,
-                    ':service_price' => $service_price
-                ]);
-                
-                $service_id = $pdo->lastInsertId();
-            }
+            // Insere serviço na tabela services
+            $sql = "INSERT INTO services (profile_id, service_name, description, price, created_at) VALUES (:profile_id, :service_name, :service_description, :service_price, NOW())";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':profile_id' => $profile_id,
+                ':service_name' => $service_name,
+                ':service_description' => $service_description,
+                ':service_price' => $service_price
+            ]);
         }
 
         // Confirma a transação
