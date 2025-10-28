@@ -1,2 +1,2 @@
 # PHP_WEBII
- Repositório destinado a disciplina "Desenvolvimento Web II"
+ Portal de Cadastro de profissões em PHP
